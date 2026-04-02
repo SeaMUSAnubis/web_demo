@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Engineering Drawing Analysis AI</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header -->
+        <header class="glass-panel header">
+            <div class="header-content">
+                <div class="logo">
+                    <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                        <path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"></path>
+                        <polyline points="3.27 6.96 12 12.01 20.73 6.96"></polyline>
+                        <line x1="12" y1="22.08" x2="12" y2="12"></line>
+                    </svg>
+                    <h1>CV Assessment Demo</h1>
+                </div>
+                <p class="subtitle">Object Detection & OCR for Engineering Drawings</p>
+            </div>
+        </header>
+
+        <!-- Main Workspace -->
+        <main class="workspace">
+            
+            <!-- Left Panel: Controls, Gallery & Text Data -->
+            <div class="left-panel">
+                <!-- Upload Zone -->
+                <div class="glass-panel section upload-section">
+                    <div class="section-header">
+                        <h2>1. Upload Drawing</h2>
+                    </div>
+                    <div class="upload-zone" id="uploadZone">
+                        <input type="file" id="fileInput" accept="image/*" class="hidden-input" multiple>
+                        <div class="upload-content" id="uploadDefaultContent">
+                            <svg class="upload-icon" xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"></path>
+                                <polyline points="17 8 12 3 7 8"></polyline>
+                                <line x1="12" y1="3" x2="12" y2="15"></line>
+                            </svg>
+                            <p>Drag & drop drawings here</p>
+                            <span class="upload-hint">or click to browse multiple files</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Gallery Area -->
+                    <div class="gallery-container hidden" id="galleryContainer">
+                        <div class="gallery-header">
+                            <span>Uploaded Files</span>
+                            <span id="fileCountBadge" class="badge">0</span>
+                        </div>
+                        <div class="gallery-grid" id="galleryGrid">
+                            <!-- Thumbnails will be injected here -->
+                        </div>
+                    </div>
+
+                    <button id="detectBtn" class="btn primary-btn" disabled>
+                        <span>Analyze All Files</span>
+                        <div class="loader hidden" id="btnLoader"></div>
+                    </button>
+                </div>
+
+                <!-- OCR Panel -->
+                <div class="glass-panel section ocr-section">
+                    <div class="section-header">
+                        <h2>OCR Extraction</h2>
+                        <div class="badge">Text Data</div>
+                    </div>
+                    <div class="panel-content ocr-panel" id="ocrPanel">
+                        <div class="empty-state">
+                            <p>OCR results will appear here.</p>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- JSON Panel -->
+                <div class="glass-panel section json-section">
+                    <div class="section-header">
+                        <h2>Raw JSON Output</h2>
+                        <button class="btn icon-btn" id="copyJsonBtn" title="Copy to clipboard">
+                            <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect><path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path></svg>
+                        </button>
+                    </div>
+                    <div class="panel-content json-panel">
+                        <pre><code id="jsonOutput">{ "status": "idle" }</code></pre>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel: Large Visualization -->
+            <div class="right-panel">
+                <div class="glass-panel section visualization-section">
+                    <div class="section-header">
+                        <h2>2. Visualization (Result)</h2>
+                        <div class="legend">
+                            <span class="legend-item"><span class="color-box part-drawing"></span> PartDrawing</span>
+                            <span class="legend-item"><span class="color-box table"></span> Table</span>
+                            <span class="legend-item"><span class="color-box note"></span> Note</span>
+                        </div>
+                    </div>
+                    <div class="visualization-zone" id="visZone">
+                        <div class="empty-state" id="visEmptyState">
+                            <p>No image loaded. Upload a file above to visualize results.</p>
+                        </div>
+                        <div class="canvas-wrapper hidden" id="canvasWrapper">
+                            <img id="previewImage" alt="Preview">
+                            <canvas id="overlayCanvas"></canvas>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Scripts -->
+    <script src="script.js"></script>
+</body>
+</html>
