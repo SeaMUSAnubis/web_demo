@@ -29,10 +29,10 @@ const COLORS = {
 let filesData = []; // Array of { id, file, imageSrc, result, status: 'idle'|'processing'|'done', element }
 let activeFileId = null;
 
-// Config API - Thay đổi đường dẫn này thành URL thực tế của ứng dụng trên Hugging Face Spaces của bạn
+// Config API
 const BACKEND_URL = window.location.hostname === "localhost" || window.location.hostname === "127.0.0.1" || window.location.protocol === "file:"
                         ? "http://127.0.0.1:7860" // Chạy qua uvicorn ở localhost (7860 tương đồng HF Spaces mặc định)
-                        : "https://your-hugging-face-space.hf.space";
+                        : "https://akumahebi-be-demo.hf.space";
 
 
 // ==== Event Listeners ==== //
